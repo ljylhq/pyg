@@ -1,30 +1,75 @@
-html,body,.pyg_view {
-  height: 100%;
+@import"common.css";
+
+// 首页分类
+.pyg_cates {
+  display: flex;
+
+  a {
+    flex: 1;
+    text-align: center;
+
+    img {
+      width: 80%;
+    }
+  }
 }
-body {
-  padding-top: 45px;
-  padding-bottom: 45px;
-}
-.pyg_view {
-  overflow: scroll;
-  background-color: aqua;
-}
-// 头部
-.pyg_header {
-   position: fixed;
-   top : 0;
-   left: 0;
-   width: 100%;
-   height: 45px;
-   background-color: #fff;
-   padding-top: 5px;
-}
-.pyg_footer {
-  position: fixed;
-  bottom : 0;
-  left: 0;
-  width: 100%;
-  height: 45px;
-  background-color: pink;
-  padding-top: 5px;
+
+// 商品分类列表
+.pyg_goodslist {
+  padding: 5px;
+
+  // 大图片
+  .goods_item {
+
+    .group_img {
+      width: 100%;
+      display: block;
+    }
+
+    // 小商品列表
+    .goods {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      li {
+        width: 49%;
+        margin-top: 5px;
+        padding: 5px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        // 商品详情
+        .goods_detail {
+          .goods_small_logo {
+            width: 100%;
+            display: block;
+          }
+          // 名称
+          .goods_name {
+            color: black;
+            font-size: 14px;
+            overflow: hidden;
+            height: 40px;
+          }
+
+          // 价格
+          .goods_price {
+            color: red;
+            font-size: 18px;
+            font-weight: 600;
+          }
+        }
+
+        // 类似商品
+        .goods_similar {
+          display: block;
+          width: 60%;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
 }

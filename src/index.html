@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,41 +11,80 @@
   <link rel="stylesheet" href="./css/common.css">
   <link rel="stylesheet" href="./css/index.css">
 </head>
+
 <body>
-  <!-- 头部开始 -->
-  <header class="pyg_header">
-    <div class="mui-input-row mui-search">
-      <input type="search" class="mui-input-clear" placeholder="">
-  </div>
-  </header>
-  <!-- 头部结束 -->
+  <!-- 头部 -->
+@@include("pyg_header.html")
 
-  <!-- 轮播图开始 -->
+  <!-- 首页内容 -->
   <div class="pyg_view">
-      <div class="mui-slider">
-          <div class="mui-slider-group mui-slider-loop">
-            <!--支持循环，需要重复图片节点-->
-            <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="https://lg-igjc8p1o-1256763078.cos.ap-shanghai.myqcloud.com/upload/banner3.png" /></a></div>
-            <div class="mui-slider-item"><a href="#"><img src="https://lg-igjc8p1o-1256763078.cos.ap-shanghai.myqcloud.com/upload/banner1.png" /></a></div>
-            <div class="mui-slider-item"><a href="#"><img src="https://lg-igjc8p1o-1256763078.cos.ap-shanghai.myqcloud.com/upload/banner2.png" /></a></div>
-            <div class="mui-slider-item"><a href="#"><img src="https://lg-igjc8p1o-1256763078.cos.ap-shanghai.myqcloud.com/upload/banner3.png" /></a></div>
-            <!--支持循环，需要重复图片节点-->
-            <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="https://lg-igjc8p1o-1256763078.cos.ap-shanghai.myqcloud.com/upload/banner1.png" /></a></div>
-          </div>
-
-           <!-- 小圆点 -->
-        <div class="mui-slider-indicator">
-            <div class="mui-indicator mui-active"></div>
-            <div class="mui-indicator"></div>
-            <div class="mui-indicator"></div>
-          </div>
-        </div>
+    <!-- 轮播图 -->
+    <div class="pyg_slide"> </div>
+    <!-- 分类菜单 -->
+    <div class="pyg_cates"></div>
+    <!-- 商品的列表 -->
+    <div class="pyg_goodslist"></div>
   </div>
-  <!-- 轮播图结束 -->
-  <footer class="pyg_footer"></footer>
+
+  <!-- 底部 -->
+@@include("pyg_footer.html")
 </body>
+
+<!-- 轮播图模板-->
+<script type="text/html" id="swiperTp1">
+  <div class="mui-slider">
+    <div class="mui-slider-group mui-slider-loop">
+      <!--支持循环，需要重复图片节点-->
+      <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="{{arr[arr.length-1].image_src}}" /></a></div>
+      {{each arr item index}}
+      <div class="mui-slider-item"><a href="#"><img src="{{item.image_src}}" /></a></div>
+      {{/each}}
+      <!--支持循环，需要重复图片节点-->
+      <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="{{arr[0].image_src}}" /></a></div>
+    </div>
+
+     <!-- 小圆点 -->
+     
+  <div class="mui-slider-indicator">
+      {{each arr item index}}
+      <div class="mui-indicator {{index==0?'mui-active':''}}"></div>
+      {{/each}}
+    </div>
+  </div>
+</script>
+<!-- 商品的列表模板 -->
+<script type="text/html" id="listTpl">
+  {{each arr item1 value1}}
+  <div class="goods_item">
+      <!-- 大图片 -->
+      <img src="{{item1.group_img}}" alt="" class="group_img">
+      <!-- 小商品列表 -->
+      <ul class="goods">
+          {{each item1.goods item2 value2}}
+        <li>
+          <!-- 商品的详情 -->
+          <a href="#" class="goods_detail">
+            <!-- 图片 -->
+            <img src="{{item2.goods_small_logo}}"
+              class="goods_small_logo" alt="">
+            <!-- 名称 -->
+            <div class="goods_name">{{item2.goods_name}}</div>
+            <!-- 价格 -->
+            <div class="goods_price">${{item2.goods_price}}</div>
+          </a>
+          <!-- 类似 的商品  -->
+          <a href="#" class="goods_similar mui-btn mui-btn-primary mui-btn-outlined">找相似</a>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/each}}
+</script>
+
 <script src="./lib/mui/js/mui.js"></script>
 <script src="./lib/zepto/zepto.js"></script>
+<script src="./lib/arttemplate/template-web.js"></script>
 <script src="./js/common.js"></script>
 <script src="./js/index.js"></script>
+
 </html>
